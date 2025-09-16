@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Хөөрхөн тест</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe6f0, #ffd1dc);
+    text-align: center;
+  }
+
+  h2, h1 {
+    margin: 20px;
+    color: #ff1493;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ff69b4;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #ff69b4;
+    color: white;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #ff1493;
+  }
+
+  .heart {
+    color: red;
+    font-size: 3rem;
+    animation: beat 1s infinite;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+</style>
+</head>
+<body>
+
+<h2 id="question">Чи ямар өнгөнд дуртай вэ?</h2>
+<input type="text" id="answer" placeholder="Хариултаа бичнэ үү">
+<button onclick="nextQuestion()">Дараах</button>
+
+<script>
+let step = 0;
+let answers = [];
+
+function nextQuestion() {
+  const input = document.getElementById('answer').value.trim();
+  if(input === "") {
+    alert("Хариултаа бичнэ үү!");
+    return;
+  }
+  answers.push(input);
+  step++;
+  
+  const question = document.getElementById('question');
+  const answerInput = document.getElementById('answer');
+  
+  if(step === 1) {
+    question.innerText = "Чи чөлөөт цагт юу хийх дуртай вэ?";
+    answerInput.value = "";
+  } else if(step === 2) {
+    question.innerText = "Чи ямар хоолонд илүү дуртай вэ?";
+    answerInput.value = "";
+  } else if(step === 3) {
+    finalAnswer();
+  }
+}
+
+function finalAnswer() {
+  document.body.innerHTML = `
+    <h1>🎉 Чиний хариултууд: ${answers.join(", ")} 🎉</h1>
+    <h1>Чи 10/9 байна 10/10 болход чамд би хэрэгтэй 💖</h1>
+    <div class="heart">❤️</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+  `;
+}
+</script>
+
+</body>
+</html>
